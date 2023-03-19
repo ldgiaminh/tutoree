@@ -79,7 +79,7 @@ const Markup = () => {
     { url: "page-login", component: Login },
     { url: "page-forgot-password", component: ForgotPassword },
     { url: "page-error-400", component: Error400 },
-    { url: "page-error-403", component: Error403 },
+
     { url: "page-error-404", component: Error404 },
     { url: "page-error-500", component: Error500 },
     { url: "page-error-503", component: Error503 },

@@ -94,17 +94,31 @@ export function loginGoogleAction(token, history) {
   return (dispatch) => {
     loginGoogle(token)
       .then((response) => {
-        console.log(response.data);
-        const tokenDetails = response.data;
-        tokenDetails.expireDate = new Date(new Date().getTime() + 8600000); // Set expiry time to 1 hour from now
-        saveTokenInLocalStorage(tokenDetails);
-        runLogoutTimer(dispatch, 8600000, history); // Logout after 1 hour
-        dispatch(loginConfirmedAction(tokenDetails));
-        history.push(`/${tokenDetails.id}-tutor-details`);
+        if (response.data.role !== "Mentor") {
+          runLogoutTimer(dispatch, 8600000, history);
+          dispatch(loginFailedAction(""));
+          history.push("/page-error-403");
+        } else {
+          console.log(response.data);
+          const tokenDetails = response.data;
+          tokenDetails.expireDate = new Date(new Date().getTime() + 8600000); // Set expiry time to 1 hour from now
+          saveTokenInLocalStorage(tokenDetails);
+          runLogoutTimer(dispatch, 8600000, history); // Logout after 1 hour
+          dispatch(loginConfirmedAction(tokenDetails));
+          history.push(`/${tokenDetails.id}-tutor-details`);
+        }
       })
       .catch((error) => {
-        const errorMessage = formatError(error.response.data);
-        dispatch(loginFailedAction(errorMessage));
+        if (
+          error.response &&
+          error.response.status === 401 &&
+          error.response.data.role !== "Mentor"
+        ) {
+          history.push("/page-error-403"); // Redirect to 401 page if role is not Mentor
+        } else {
+          const errorMessage = formatError(error.response.data);
+          dispatch(loginFailedAction(errorMessage));
+        }
       });
   };
 }

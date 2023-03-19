@@ -12,6 +12,7 @@ import "./vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
 import "./vendor/datatables/css/dataTables.min.css";
 import "./css/style.css";
 import MentorAuth from "./jsx/mentor";
+import Error403 from "./jsx/pages/Error403";
 
 // const SignUp = lazy(() => import("./jsx/pages/Registration"));
 // const ForgotPassword = lazy(() => import("./jsx/pages/ForgotPassword"));
@@ -31,6 +32,7 @@ function App(props) {
   let routes = (
     <Switch>
       <Route path="/login" component={Login} />
+      <Route path="/page-error-403" component={Error403} />
       {/* <Route path="/page-register" component={SignUp} />
       <Route path="/page-forgot-password" component={ForgotPassword} /> */}
     </Switch>
