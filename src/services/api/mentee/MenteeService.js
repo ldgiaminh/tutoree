@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const MENTEE_API_BASE_URL = "http://13.214.189.72/api/v1/mentees";
+const MENTEE_API_BASE_URL = "https://13.214.189.72/api/v1/mentees";
 
 const MENTEE_TO_MENTOR_API_URL = "https://13.214.189.72/api/v1/users";
 
