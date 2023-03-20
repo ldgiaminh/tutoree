@@ -43,7 +43,6 @@
     "material-ui": "^0.20.2",
     "material-ui-color-picker": "^3.5.1",
     "metismenujs": "^1.2.1",
-    "mkcert": "^1.5.1",
     "nouislider-react": "^3.3.9",
     "p-min-delay": "^3.1.0",
     "rc-color-picker": "^1.2.6",
@@ -103,7 +102,7 @@
     "yup": "^0.32.8"
   },
   "scripts": {
-    "start": "set HTTPS=true&&set SSL_CRT_FILE={CERT-PATH}&&set SSL_KEY_FILE={KEY-PATH}&&react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
