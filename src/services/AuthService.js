@@ -35,13 +35,13 @@ export function signUp(email, password) {
 
 export function login(email, password) {
   return axios.post(
-    `http://13.214.189.72/api/v1/authentication/admin/sign-in?email=${email}&password=${password}`
+    `https://13.214.189.72/api/v1/authentication/admin/sign-in?email=${email}&password=${password}`
   );
 }
 
 export function loginGoogle(token) {
   return axios.post(
-    `http://13.214.189.72/api/v1/authentication/login?token=${token}`
+    `https://13.214.189.72/api/v1/authentication/login?token=${token}`
   );
 }
 

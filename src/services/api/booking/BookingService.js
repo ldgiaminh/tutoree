@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BOOKING_API_BASE_URL = "http://13.214.189.72/api/v1/bookings";
+const BOOKING_API_BASE_URL = "https://13.214.189.72/api/v1/bookings";
 
 class BookingService {
   getBookings() {
