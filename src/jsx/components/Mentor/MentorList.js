@@ -6,11 +6,6 @@ import { connect, useDispatch } from "react-redux";
 import Loader from "../../loader";
 import { loadingToggleAction } from "../../../store/actions/AuthActions";
 
-///Import
-import Approved from "./Status/Approved/Approved";
-import Pending from "./Status/Pending/Pending";
-import Reject from "./Status/Reject/Reject";
-
 import MentorService from "../../../services/api/mentor/MentorService";
 
 const MentorList = (props) => {
@@ -123,10 +118,10 @@ const MentorList = (props) => {
                       <th>Full Name</th>
                       <th>Job</th>
                       <th>Address</th>
-                      <th>Qualification</th>
                       <th>Gender</th>
                       <th>Contact</th>
-                      <th>Status</th>
+                      {/* <th>Qualification</th> */}
+                      {/* <th>Status</th> */}
                       <th className="bg-none"></th>
                     </tr>
                   </thead>
@@ -165,11 +160,7 @@ const MentorList = (props) => {
                                 <span>{mentor.country}</span>
                               </div>
                             </td>
-                            <td>
-                              <div>
-                                <h5>{mentor.qualification}</h5>
-                              </div>
-                            </td>
+
                             <td>
                               <h5>{mentor.gender}</h5>
                             </td>
@@ -181,7 +172,12 @@ const MentorList = (props) => {
                                 </span>
                               </div>
                             </td>
-                            <td>
+                            {/* <td>
+                              <div>
+                                <h5>{mentor.qualification}</h5>
+                              </div>
+                            </td> */}
+                            {/* <td>
                               <span
                                 className={
                                   mentor.approveStatusId === 1
@@ -201,7 +197,7 @@ const MentorList = (props) => {
                                   ? "REJECT"
                                   : "NOT REQUEST"}
                               </span>
-                            </td>
+                            </td> */}
                             <td>
                               <Dropdown className="dropdown">
                                 <Dropdown.Toggle
@@ -302,7 +298,7 @@ const MentorList = (props) => {
 
                     <Link
                       className="paginate_button next"
-                      to="/turor"
+                      to="/tutor"
                       onClick={() =>
                         activePag.current + 1 < paggination.length &&
                         onClick(activePag.current + 1)

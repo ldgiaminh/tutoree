@@ -3,6 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import MentorService from "../../../../services/api/mentor/MentorService";
+import swal from "sweetalert";
 
 const EditMentor = () => {
   const { id } = useParams();
@@ -20,14 +21,20 @@ const EditMentor = () => {
     job: "",
     gender: "",
     image: "",
+    schedule: "",
     websiteUrl: "",
     approveStatusId: "",
   });
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setMentor({ ...mentor, [e.target.name]: value });
-  };
+  let schedules = [];
+  if (mentor.schedule !== "") {
+    schedules = JSON.parse(mentor.schedule);
+  }
+
+  // const handleChange = (e) => {
+  //   const value = e.target.value;
+  //   setMentor({ ...mentor, [e.target.name]: value });
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,27 +48,51 @@ const EditMentor = () => {
     fetchData();
   }, [id]);
 
+  // const updateMentor = (e) => {
+  //   e.preventDefault();
+  //   MentorService.updateMentor(mentor)
+  //     .then(() => {
+  //       history.push("./mentor");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  //   console.log(mentor);
+  // };
+
+  const handleChange = (e, index) => {
+    if (index !== undefined) {
+      const newSchedules = [...schedules];
+      newSchedules[index].isActive = !newSchedules[index].isActive;
+      setMentor({ ...mentor, schedule: JSON.stringify(newSchedules) });
+    } else {
+      const value = e.target.value;
+      setMentor({ ...mentor, [e.target.name]: value });
+    }
+  };
+
   const updateMentor = (e) => {
     e.preventDefault();
     MentorService.updateMentor(mentor)
       .then(() => {
-        history.push("./mentor");
+        swal("Success!", "Update Information Successful", "success");
+        setMentor(mentor);
+        history.push("/tutor");
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(mentor);
   };
 
   return (
     <Fragment>
-      <PageTitle activeMenu="Edit" motherMenu="Mentor" pageContent="Edit" />
+      <PageTitle activeMenu="Edit" motherMenu="tutor" pageContent="Edit" />
 
       <div className="row">
         <div className="col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Edit Mentor</h4>
+              <h4 className="card-title">Edit Tutor</h4>
             </div>
             <div className="card-body">
               <div className="basic-form">
@@ -216,18 +247,29 @@ const EditMentor = () => {
                         value={mentor.websiteUrl}
                       />
                     </div>
-                    {/* <div className="form-group mb-3 col-md-6">
+                    <div className="form-group mb-3 col-md-6">
                       <label className="col-form-label col-form-label-lg">
-                        Status
+                        Schedule
                       </label>
-                      <input
-                        type="text"
-                        className="form-control form-control-lg"
-                        name="status"
-                        onChange={(e) => handleChange(e)}
-                        value={mentor.approveStatusId}
-                      />
-                    </div> */}
+                      {schedules?.map((item, index) => (
+                        <div id="multiselect" key={index}>
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id="customCheckBox1"
+                            name="isActive"
+                            checked={item.isActive}
+                            onChange={(e) => handleChange(e, index)}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="customCheckBox1"
+                          >
+                            {item.date}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="form-group"></div>
                   <button className="btn btn-primary">Update</button>

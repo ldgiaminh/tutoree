@@ -41,7 +41,7 @@ const EditMentee = () => {
     e.preventDefault();
     MenteeService.updateMentee(mentee)
       .then((response) => {
-        history.push("/mentee");
+        history.push("/student");
       })
       .catch((error) => {
         console.log(error);

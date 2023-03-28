@@ -72,7 +72,6 @@ const MentorDetail = () => {
         swal("Success!", "Update Information Successful", "success");
         setMentors(mentors);
         setActiveToggle("aboutMe");
-        console.log(mentors);
       })
       .catch((error) => {
         console.log(error);

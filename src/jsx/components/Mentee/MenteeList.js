@@ -128,7 +128,7 @@ const MenteeList = (props) => {
                       </thead>
                       {!loading && (
                         <tbody>
-                          {mentees.map((mentee) => {
+                          {jobData.current.map((mentee) => {
                             return (
                               <tr role="row" className="odd" key={mentee.id}>
                                 <td>
@@ -251,7 +251,7 @@ const MenteeList = (props) => {
                       >
                         <Link
                           className="paginate_button previous "
-                          to="/mentee"
+                          to="/student"
                           onClick={() =>
                             activePag.current > 0 &&
                             onClick(activePag.current - 1)
@@ -267,7 +267,7 @@ const MenteeList = (props) => {
                           {paggination.map((number, i) => (
                             <Link
                               key={i}
-                              to="/mentee"
+                              to="/student"
                               className={`paginate_button  ${
                                 activePag.current === i ? "current" : ""
                               } `}
@@ -280,7 +280,7 @@ const MenteeList = (props) => {
 
                         <Link
                           className="paginate_button next"
-                          to="/mentee"
+                          to="/student"
                           onClick={() =>
                             activePag.current + 1 < paggination.length &&
                             onClick(activePag.current + 1)
